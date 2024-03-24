@@ -2,7 +2,7 @@
 `clean.py` will download all of the below files, gunzip them and perform all cleaning and seperations of positives and negatives.
 Everything is outputted to `output` directory seperated by `positive` and `negative` subdirectories, each of which follow the same structure of seperating the raw bed files, sequence only and trunucated sequences files.
 
-> The script expects the refernce files in `$REPO/references`
+> The script expects the refernce files in `$REPO/reference`
 
 - Bed Files (10)
  - [ENCFF089TRW](https://www.encodeproject.org/files/ENCFF089TRW/@@download/ENCFF089TRW.bed.gz)
