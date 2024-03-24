@@ -109,9 +109,10 @@ def create_and_clean_pos():
         )
         for x, n in avg_lens
     ]
+    return avg_lens
 
 
-def create_and_clean_negs():
+def create_and_clean_negs(avg_lens: List[Tuple[Path, int]]):
     [
         create_negative(
             Path(x), Path(join(NEG_DIR, "bed_files", x.name)).with_suffix(".bed")
@@ -120,7 +121,7 @@ def create_and_clean_negs():
     ]
     run_beds(Path(NEG_DIR, "bed_files"), Path(NEG_DIR, "bed_output"))
     files = list(map(Path, os.scandir(Path(NEG_DIR, "bed_output"))))
-    avg_lens = [(x, get_avg_len(x)) for x in files]
+    avg_lens = [(file, len) for file_path, len in avg_lens for file in files if file.stem == file_path.stem]
     [
         trim(
             file_path=x,
@@ -136,5 +137,5 @@ if __name__ == "__main__":
     os.system(join(SCRIPT_DIR, 'get_all.sh')) # For testing you cacommented out once they are initially downloaded... 
     rmtree(OUT_DIR, ignore_errors=True) # MAybe unneccesary but i was sick of the dirs being dirty before testing each time 
     init_dirs()
-    create_and_clean_pos()
-    create_and_clean_negs()
+    avg_lens = create_and_clean_pos()
+    create_and_clean_negs(avg_lens)
