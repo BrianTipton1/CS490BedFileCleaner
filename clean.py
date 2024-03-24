@@ -134,7 +134,7 @@ def create_and_clean_negs():
 
 if __name__ == "__main__":
     os.system(join(SCRIPT_DIR, 'get_all.sh')) # For testing you cacommented out once they are initially downloaded... 
-    rmtree(OUT_DIR) # MAybe unneccesary but i was sick of the dirs being dirty before testing each time 
+    rmtree(OUT_DIR, ignore_errors=True) # MAybe unneccesary but i was sick of the dirs being dirty before testing each time 
     init_dirs()
     create_and_clean_pos()
     create_and_clean_negs()
